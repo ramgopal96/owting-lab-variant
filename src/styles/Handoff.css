@@ -607,17 +607,18 @@ body.lab-active {
 
 /* Variant Specific Animations */
 /* 2. Halo (Original Spin) */
+/* 2. Halo (Static but Breathing) */
 .v-original .halo-beam {
-    animation: spin var(--halo-speed, 10s) linear infinite, breatheInner 4s ease-in-out infinite;
+    animation: breatheInner 4s ease-in-out infinite;
     filter: blur(var(--halo-blur, 8px));
 }
 
 .v-original .halo-ambient {
-    animation: spin calc(var(--halo-speed, 10s) * 1.4) linear infinite, breatheOuter 5s ease-in-out infinite;
+    animation: breatheOuter 5s ease-in-out infinite;
 }
 
 .v-original .glow-layer {
-    animation: spin calc(var(--halo-speed, 10s) * 2) linear infinite, breatheAmbient 6s ease-in-out infinite;
+    animation: breatheAmbient 6s ease-in-out infinite;
 }
 
 /* 3. Pulsing (Solar Flare) */
