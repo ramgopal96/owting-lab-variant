@@ -3,19 +3,19 @@ import { Microphone, PaperPlaneRight, X, DownloadSimple, FileCode } from '@phosp
 import './styles/Handoff.css';
 
 const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting AI...", leftIconType = null, isExitMode = false) => {
-    const cleanTitle = title.replace(/^[0-9\.\s]+/, ''); // Strip leading numbers like "1. "
-    const componentName = cleanTitle.split('(')[0].trim().replace(/[^a-zA-Z0-9]/g, '') + 'Input';
+    // 1. Clean the title to create a valid React Component Name (e.g., "1. Aura" -> "AuraInput")
+    const cleanTitle = title.replace(/^[0-9\.\s]+/, '').split('(')[0].trim().replace(/[^a-zA-Z0-9]/g, '');
+    const componentName = cleanTitle + 'Input';
 
-    // Inline SVG strings for dependency-free portable code
+    // 2. Inline SVG strings (Dependency-free ingredients)
     const ICONS = {
         microphone: `<svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M128,176a48.05,48.05,0,0,0,48-48V64a48,48,0,0,0-96,0v64A48.05,48.05,0,0,0,128,176ZM96,64a32,32,0,0,1,64,0v64a32,32,0,0,1-64,0Zm40,143.6V232a8,8,0,0,1-16,0V207.6A80.11,80.11,0,0,1,48,128a8,8,0,0,1,16,0,64,64,0,0,0,128,0,8,8,0,0,1,16,0A80.11,80.11,0,0,1,136,207.6Z"></path></svg>`,
         paperPlane: `<svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor"><path d="M227.32,28.68a16,16,0,0,0-15.66-4.08l-157.76,48.69a16,16,0,0,0-2.24,5.8H48a16,16,0,0,0-15,21.32l25.7,77.1L95.6,220.39A16,16,0,0,0,110.82,232H112a16,16,0,0,0,14.07-9l97.66-179.79A16,16,0,0,0,227.32,28.68Z"></path></svg>`,
-        exit: `<svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>`,
-        arrowRight: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6L18 18" /></svg>`
+        exit: `<svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path></svg>`
     };
 
-    // Common CSS shared by all variants (Layout, Inputs, Icons, Base Keyframes)
-    const COMMON_CSS = `
+    // 3. Embedded Styles (Portable Ingredients)
+    const CSS = `
     /* Resets & Container */
     * { box-sizing: border-box; }
     
@@ -24,7 +24,7 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
         align-items: center;
         justify-content: center;
         min-height: 100vh;
-        background: #f0f4f8; /* Light gray background to show off white glow */
+        background: #f0f4f8; /* The "Clean Slate" background to make effects pop */
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
@@ -142,118 +142,118 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
+
+    /* Variant Implementation */
+    ${variantClass === 'v-original' ? `
+        .halo-beam {
+            inset: 4px;
+            background: conic-gradient(from var(--angle), #6FC9E8, #a0d8f0, rgba(255, 255, 255, 0.8), #a0d8f0, #6FC9E8);
+            animation: breatheInner 4s ease-in-out infinite;
+            filter: blur(8px);
+        }
+        .halo-ambient {
+            inset: 0px;
+            background: conic-gradient(from var(--angle), #6FC9E8, rgba(255, 255, 255, 0.3), #6FC9E8, #6FC9E8);
+            animation: breatheOuter 5s ease-in-out infinite;
+            filter: blur(15px);
+        }
+        .glow-layer {
+            inset: -5px;
+            background: conic-gradient(from var(--angle), #6FC9E8, rgba(255, 255, 255, 0.1), #6FC9E8);
+            animation: breatheAmbient 6s ease-in-out infinite;
+            filter: blur(20px);
+            opacity: 0.2;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-pulse' ? `
+        @keyframes flarePulse {
+            0%, 100% { transform: scale(0.95); opacity: 0.4; filter: blur(15px); }
+            50% { transform: scale(1.1); opacity: 0.8; filter: blur(25px); }
+        }
+        .halo-beam {
+            inset: 4px;
+            background: conic-gradient(from var(--angle), #6FC9E8, #ffffff, #6FC9E8);
+            animation: flarePulse 3s ease-in-out infinite;
+        }
+        .halo-ambient {
+            inset: -2px;
+            background: #6FC9E8;
+            opacity: 0.3;
+            animation: flarePulse 4s ease-in-out infinite 0.5s;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-orbs' ? `
+        @keyframes audioPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; filter: blur(10px); }
+            50% { transform: scale(1.03); opacity: 0.9; filter: blur(14px); }
+        }
+        .halo-beam {
+            inset: 4px;
+            background: conic-gradient(from var(--angle), #6FC9E8, #fff, #6FC9E8);
+            animation: spin 4s linear infinite, audioPulse 1.2s ease-in-out infinite;
+            filter: blur(10px);
+        }
+        .halo-ambient {
+            inset: 0px;
+            background: rgba(111, 201, 232, 0.4);
+            animation: spin 6s linear infinite reverse, audioPulse 1.2s ease-in-out infinite 0.1s;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-shimmer' ? `
+        .halo-beam, .halo-ambient {
+            background: linear-gradient(90deg, transparent, #6FC9E8, #fff, #6FC9E8, transparent);
+            background-size: 200% 100%;
+            animation: shimmerMove 5s linear infinite;
+            inset: -2px;
+            border-radius: 40px;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-steady' ? `
+        .halo-ambient {
+            inset: -5px;
+            background: linear-gradient(to right, #6FC9E8, #A5F3FC);
+            animation: slowDrift 5s ease-in-out infinite;
+        }
+        .glow-layer {
+            animation: slowDrift 8s ease-in-out infinite reverse;
+        }
+    ` : ''}
+
+    ${variantClass === 'v-flowing-border' ? `
+        .halo-beam {
+            inset: -3px;
+            background: linear-gradient(90deg, #6FC9E8, #ffffff, #6FC9E8, #ffffff, #6FC9E8);
+            background-size: 300% 300%;
+            filter: blur(10px);
+            border-radius: 34px;
+            animation: borderFlow 4s ease-in-out infinite;
+            z-index: -1;
+            opacity: 1;
+        }
+        .halo-ambient {
+            inset: -4px;
+            background: linear-gradient(90deg, rgba(111, 201, 232, 0.4), rgba(255, 255, 255, 0.6), rgba(111, 201, 232, 0.4));
+            background-size: 300% 300%;
+            filter: blur(20px);
+            border-radius: 36px;
+            animation: borderFlow 4s ease-in-out infinite reverse;
+            opacity: 0.6;
+        }
+        .glow-layer {
+            inset: -10px;
+            background: radial-gradient(circle, rgba(111, 201, 232, 0.3) 0%, transparent 70%);
+            filter: blur(15px);
+            opacity: 0.4;
+            animation: breatheAmbient 4s ease-in-out infinite;
+        }
+    ` : ''}
     `;
 
-    // Specific CSS for each variant (mirrored from Handoff.css)
-    const VARIANT_CSS = {
-        'v-original': `
-            /* 2. Halo (Static but Breathing) */
-            .halo-beam {
-                inset: 4px;
-                background: conic-gradient(from var(--angle), #6FC9E8, #a0d8f0, rgba(255, 255, 255, 0.8), #a0d8f0, #6FC9E8);
-                animation: breatheInner 4s ease-in-out infinite;
-                filter: blur(8px);
-            }
-            .halo-ambient {
-                inset: 0px;
-                background: conic-gradient(from var(--angle), #6FC9E8, rgba(255, 255, 255, 0.3), #6FC9E8, #6FC9E8);
-                animation: breatheOuter 5s ease-in-out infinite;
-                filter: blur(15px);
-            }
-            .glow-layer {
-                inset: -5px;
-                background: conic-gradient(from var(--angle), #6FC9E8, rgba(255, 255, 255, 0.1), #6FC9E8);
-                animation: breatheAmbient 6s ease-in-out infinite;
-                filter: blur(20px);
-                opacity: 0.2;
-            }
-        `,
-        'v-pulse': `
-            @keyframes flarePulse {
-                0%, 100% { transform: scale(0.95); opacity: 0.4; filter: blur(15px); }
-                50% { transform: scale(1.1); opacity: 0.8; filter: blur(25px); }
-            }
-            .halo-beam {
-                inset: 4px;
-                background: conic-gradient(from var(--angle), #6FC9E8, #ffffff, #6FC9E8);
-                animation: flarePulse 3s ease-in-out infinite;
-            }
-            .halo-ambient {
-                inset: -2px;
-                background: #6FC9E8;
-                opacity: 0.3;
-                animation: flarePulse 4s ease-in-out infinite 0.5s;
-            }
-        `,
-        'v-orbs': `
-            @keyframes audioPulse {
-                0%, 100% { transform: scale(1); opacity: 0.5; filter: blur(10px); }
-                50% { transform: scale(1.03); opacity: 0.9; filter: blur(14px); }
-            }
-            .halo-beam {
-                inset: 4px;
-                background: conic-gradient(from var(--angle), #6FC9E8, #fff, #6FC9E8);
-                animation: spin 4s linear infinite, audioPulse 1.2s ease-in-out infinite;
-                filter: blur(10px);
-            }
-            .halo-ambient {
-                inset: 0px;
-                background: rgba(111, 201, 232, 0.4);
-                animation: spin 6s linear infinite reverse, audioPulse 1.2s ease-in-out infinite 0.1s;
-            }
-        `,
-        'v-shimmer': `
-            .halo-beam, .halo-ambient {
-                background: linear-gradient(90deg, transparent, #6FC9E8, #fff, #6FC9E8, transparent);
-                background-size: 200% 100%;
-                animation: shimmerMove 5s linear infinite;
-                inset: -2px;
-                border-radius: 40px;
-            }
-        `,
-        'v-steady': `
-            .halo-ambient {
-                inset: -5px;
-                background: linear-gradient(to right, #6FC9E8, #A5F3FC);
-                animation: slowDrift 5s ease-in-out infinite;
-            }
-            .glow-layer {
-                animation: slowDrift 8s ease-in-out infinite reverse;
-            }
-        `,
-        'v-flowing-border': `
-            .halo-beam {
-                inset: -3px;
-                background: linear-gradient(90deg, #6FC9E8, #ffffff, #6FC9E8, #ffffff, #6FC9E8);
-                background-size: 300% 300%;
-                filter: blur(10px);
-                border-radius: 34px;
-                animation: borderFlow 4s ease-in-out infinite;
-                z-index: -1;
-                opacity: 1;
-            }
-            .halo-ambient {
-                inset: -4px;
-                background: linear-gradient(90deg, rgba(111, 201, 232, 0.4), rgba(255, 255, 255, 0.6), rgba(111, 201, 232, 0.4));
-                background-size: 300% 300%;
-                filter: blur(20px);
-                border-radius: 36px;
-                animation: borderFlow 4s ease-in-out infinite reverse;
-                opacity: 0.6;
-            }
-            .glow-layer {
-                inset: -10px;
-                background: radial-gradient(circle, rgba(111, 201, 232, 0.3) 0%, transparent 70%);
-                filter: blur(15px);
-                opacity: 0.4;
-                animation: breatheAmbient 4s ease-in-out infinite;
-            }
-        `
-    };
-
-    const selectedVariantCSS = VARIANT_CSS[variantClass] || VARIANT_CSS['v-original'];
-
-    // Construct the single-file component
+    // 4. Component Template (The Final Output)
     const code = `import React from 'react';
 
 // Wrapper component to center the input on screen
@@ -267,8 +267,7 @@ export const ${componentName} = () => {
     return (
         <DemoWrapper>
             <style>{\`
-                ${COMMON_CSS}
-                ${selectedVariantCSS}
+                ${CSS}
             \`}</style>
             
             <div className="input-box">
@@ -280,7 +279,7 @@ export const ${componentName} = () => {
                 
                 ${leftIconType ? `
                 <div className="input-icon-left">
-                    <div style={{ color: '#9CA3AF' }} dangerouslySetInnerHTML={{ __html: \`${ICONS[leftIconType]}\` }} />
+                    <div style={{ color: '#9CA3AF', display: 'flex' }} dangerouslySetInnerHTML={{ __html: \`${ICONS[leftIconType]}\` }} />
                 </div>` : ''}
 
                 <input 
@@ -484,28 +483,31 @@ const Handoff = () => {
                     </section>
 
                     <section className="doc-section">
-                        <div className="section-title">Developer Handoff Guide</div>
-                        <div className="doc-body-text">
-                            To make these downloads 100% portable and "self-aware", we use three specific technical ingredients:
-                        </div>
-                        <div className="specs-stack" style={{ gap: '20px' }}>
+                        <div className="section-title">Specs</div>
+                        <div className="specs-stack">
                             <div className="spec-line-detailed">
-                                <span className="sp-label">1. The Wrapper:</span>
-                                <span className="sp-desc">We use a <code>DemoWrapper</code> that forces <code>min-height: 100vh</code>. This ensures the component owns the entire screen immediately.</span>
+                                <span className="sp-label">Trigger:</span>
+                                <span className="sp-desc"><strong>On Focus</strong>. Fade-in triggered via CSS visibility transition.</span>
                             </div>
                             <div className="spec-line-detailed">
-                                <span className="sp-label">2. Centering:</span>
-                                <span className="sp-desc">Applied <code>display: flex</code> and <code>justify-content: center</code> to the wrapper. No matter the screen size, the component stays perfectly centered.</span>
+                                <span className="sp-label">Animation:</span>
+                                <span className="sp-desc"><code>300ms ease-in-out</code> Opacity & Scale transforms.</span>
                             </div>
                             <div className="spec-line-detailed">
-                                <span className="sp-label">3. Zero-Dep:</span>
-                                <span className="sp-desc">All CSS is embedded in a <code>&lt;style&gt;</code> tag and icons are <strong>Inline SVGs</strong>. This means no <code>npm install</code> is required to see a perfect preview.</span>
+                                <span className="sp-label">Rendering:</span>
+                                <span className="sp-desc">GPU-Accelerated <code>translateZ(0)</code> layer at 60fps.</span>
                             </div>
                             <div className="spec-line-detailed">
-                                <span className="sp-label">4. The Prompt:</span>
-                                <div className="sp-desc" style={{ background: '#F8FAFC', padding: '12px', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '11px', color: '#64748B' }}>
-                                    <em>"Transform this component into a standalone, portable preview. Wrap it in a 'DemoWrapper' that uses Flexbox to center it perfectly. Embed all CSS directly using a &lt;style&gt; tag and ensure all icons are inline SVGs. The goal is a single file I can copy-paste into any project."</em>
-                                </div>
+                                <span className="sp-label">Masking:</span>
+                                <span className="sp-desc">Precision <code>mask-image</code> pathing for light flow.</span>
+                            </div>
+                            <div className="spec-line-detailed">
+                                <span className="sp-label">Blending:</span>
+                                <span className="sp-desc"><code>screen</code> blend mode for additive chromatic glow.</span>
+                            </div>
+                            <div className="spec-line-detailed">
+                                <span className="sp-label">Framework:</span>
+                                <span className="sp-desc">Built using <strong>React Native</strong> for native mobile performance.</span>
                             </div>
                         </div>
                     </section>
