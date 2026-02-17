@@ -484,31 +484,28 @@ const Handoff = () => {
                     </section>
 
                     <section className="doc-section">
-                        <div className="section-title">Specs</div>
-                        <div className="specs-stack">
+                        <div className="section-title">Developer Handoff Guide</div>
+                        <div className="doc-body-text">
+                            To make these downloads 100% portable and "self-aware", we use three specific technical ingredients:
+                        </div>
+                        <div className="specs-stack" style={{ gap: '20px' }}>
                             <div className="spec-line-detailed">
-                                <span className="sp-label">Trigger:</span>
-                                <span className="sp-desc"><strong>On Focus</strong>. Fade-in triggered via CSS visibility transition.</span>
+                                <span className="sp-label">1. The Wrapper:</span>
+                                <span className="sp-desc">We use a <code>DemoWrapper</code> that forces <code>min-height: 100vh</code>. This ensures the component owns the entire screen immediately.</span>
                             </div>
                             <div className="spec-line-detailed">
-                                <span className="sp-label">Animation:</span>
-                                <span className="sp-desc"><code>300ms ease-in-out</code> Opacity & Scale transforms.</span>
+                                <span className="sp-label">2. Centering:</span>
+                                <span className="sp-desc">Applied <code>display: flex</code> and <code>justify-content: center</code> to the wrapper. No matter the screen size, the component stays perfectly centered.</span>
                             </div>
                             <div className="spec-line-detailed">
-                                <span className="sp-label">Rendering:</span>
-                                <span className="sp-desc">GPU-Accelerated <code>translateZ(0)</code> layer at 60fps.</span>
+                                <span className="sp-label">3. Zero-Dep:</span>
+                                <span className="sp-desc">All CSS is embedded in a <code>&lt;style&gt;</code> tag and icons are <strong>Inline SVGs</strong>. This means no <code>npm install</code> is required to see a perfect preview.</span>
                             </div>
                             <div className="spec-line-detailed">
-                                <span className="sp-label">Masking:</span>
-                                <span className="sp-desc">Precision <code>mask-image</code> pathing for light flow.</span>
-                            </div>
-                            <div className="spec-line-detailed">
-                                <span className="sp-label">Blending:</span>
-                                <span className="sp-desc"><code>screen</code> blend mode for additive chromatic glow.</span>
-                            </div>
-                            <div className="spec-line-detailed">
-                                <span className="sp-label">Framework:</span>
-                                <span className="sp-desc">Built using <strong>React Native</strong> for native mobile performance.</span>
+                                <span className="sp-label">4. The Prompt:</span>
+                                <div className="sp-desc" style={{ background: '#F8FAFC', padding: '12px', borderRadius: '8px', border: '1px solid #E2E8F0', fontSize: '11px', color: '#64748B' }}>
+                                    <em>"Transform this component into a standalone, portable preview. Wrap it in a 'DemoWrapper' that uses Flexbox to center it perfectly. Embed all CSS directly using a &lt;style&gt; tag and ensure all icons are inline SVGs. The goal is a single file I can copy-paste into any project."</em>
+                                </div>
                             </div>
                         </div>
                     </section>
