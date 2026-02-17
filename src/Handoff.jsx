@@ -149,7 +149,7 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
             inset: 4px;
             background: conic-gradient(from var(--angle), #6FC9E8, #a0d8f0, rgba(255, 255, 255, 0.8), #a0d8f0, #6FC9E8);
             animation: breatheInner 4s ease-in-out infinite;
-            filter: blur(8px);
+            filter: blur(16px);
         }
         .halo-ambient {
             inset: 0px;
@@ -193,7 +193,7 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
             inset: 4px;
             background: conic-gradient(from var(--angle), #6FC9E8, #fff, #6FC9E8);
             animation: spin 4s linear infinite, audioPulse 1.2s ease-in-out infinite;
-            filter: blur(10px);
+            filter: blur(16px);
         }
         .halo-ambient {
             inset: 0px;
@@ -228,7 +228,7 @@ const GENERATE_REACT_COMPONENT = (title, variantClass, defaultText = "Ask Owting
             inset: -3px;
             background: linear-gradient(90deg, #6FC9E8, #ffffff, #6FC9E8, #ffffff, #6FC9E8);
             background-size: 300% 300%;
-            filter: blur(10px);
+            filter: blur(16px);
             border-radius: 34px;
             animation: borderFlow 4s ease-in-out infinite;
             z-index: -1;
@@ -435,8 +435,8 @@ const ControlsPanel = ({ speed, setSpeed, blur, setBlur, text, setText }) => {
 };
 
 const Handoff = () => {
-    const [speed, setSpeed] = useState(3);
-    const [blur, setBlur] = useState(5);
+    const [speed, setSpeed] = useState(4);
+    const [blur, setBlur] = useState(16);
     const [text, setText] = useState("Ask Owting AI...");
     const [colorTheme, setColorTheme] = useState('owting');
 
